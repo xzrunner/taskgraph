@@ -1,0 +1,5 @@
+taskgraph/
+projects/*
+
+!projects/taskgraph.vcxproj
+!projects/taskgraph.vcxproj.filters

@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{5e7a3103-1f09-4893-8659-bd70fb7f84ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools">
+      <UniqueIdentifier>{89738eda-e65a-4d24-93dc-4e78cd1d6fc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\task">
+      <UniqueIdentifier>{42d22f01-6c38-41dc-b723-305ffb9d7627}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools\rtti">
+      <UniqueIdentifier>{a7f457f9-aa59-4b31-9be8-df57c725a080}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\param">
+      <UniqueIdentifier>{f9f5c63a-1f64-48ee-b386-238c7ed63479}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tasks">
+      <UniqueIdentifier>{417610eb-8303-492a-9170-bc7d729b5218}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\taskgraph\TaskGraph.h" />
+    <ClInclude Include="..\..\..\include\taskgraph\typedef.h" />
+    <ClInclude Include="..\..\..\include\taskgraph\Task.h">
+      <Filter>dataset\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\taskgraph\task_include_gen.h">
+      <Filter>tools\rtti</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\taskgraph\task_regist_cfg.h">
+      <Filter>tools\rtti</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\taskgraph\task_rttr_gen.h">
+      <Filter>tools\rtti</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\taskgraph\Param.h">
+      <Filter>dataset\param</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\taskgraph\ParamType.h">
+      <Filter>dataset\param</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\taskgraph\ParamImpl.h">
+      <Filter>dataset\param</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\taskgraph\TaskHelper.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\taskgraph\task\Mipmap.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\taskgraph\task\Mipmap.parm.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\TaskGraph.cpp" />
+    <ClCompile Include="..\..\..\source\Task.cpp">
+      <Filter>dataset\task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\RegistRTTR.cpp">
+      <Filter>tools\rtti</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\TaskHelper.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\task\Mipmap.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
