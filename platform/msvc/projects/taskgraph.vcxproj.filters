@@ -19,6 +19,12 @@
     <Filter Include="tasks">
       <UniqueIdentifier>{417610eb-8303-492a-9170-bc7d729b5218}</UniqueIdentifier>
     </Filter>
+    <Filter Include="tasks\io">
+      <UniqueIdentifier>{a5aadb1e-c475-439e-be07-70cdaa0014f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tasks\image">
+      <UniqueIdentifier>{8239b50a-7b71-4085-8550-4ca4857c4a55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\taskgraph\TaskGraph.h" />
@@ -48,10 +54,22 @@
       <Filter>tools</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\taskgraph\task\Mipmap.h">
-      <Filter>tasks</Filter>
+      <Filter>tasks\image</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\taskgraph\task\Mipmap.parm.h">
-      <Filter>tasks</Filter>
+      <Filter>tasks\image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\taskgraph\task\ReadImage.h">
+      <Filter>tasks\io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\taskgraph\task\ReadImage.parm.h">
+      <Filter>tasks\io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\taskgraph\task\WriteImage.h">
+      <Filter>tasks\io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\taskgraph\task\WriteImage.parm.h">
+      <Filter>tasks\io</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -66,7 +84,16 @@
       <Filter>tools</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\task\Mipmap.cpp">
-      <Filter>tasks</Filter>
+      <Filter>tasks\image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\task\ParamImpl.cpp">
+      <Filter>dataset\param</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\task\ReadImage.cpp">
+      <Filter>tasks\io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\task\WriteImage.cpp">
+      <Filter>tasks\io</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -14,8 +14,12 @@
     <ClInclude Include="..\..\..\include\taskgraph\TaskGraph.h" />
     <ClInclude Include="..\..\..\include\taskgraph\Task.h" />
     <ClInclude Include="..\..\..\include\taskgraph\TaskHelper.h" />
+    <ClInclude Include="..\..\..\include\taskgraph\task\ReadImage.h" />
+    <ClInclude Include="..\..\..\include\taskgraph\task\ReadImage.parm.h" />
     <ClInclude Include="..\..\..\include\taskgraph\task\Mipmap.h" />
     <ClInclude Include="..\..\..\include\taskgraph\task\Mipmap.parm.h" />
+    <ClInclude Include="..\..\..\include\taskgraph\task\WriteImage.h" />
+    <ClInclude Include="..\..\..\include\taskgraph\task\WriteImage.parm.h" />
     <ClInclude Include="..\..\..\include\taskgraph\task_include_gen.h" />
     <ClInclude Include="..\..\..\include\taskgraph\task_regist_cfg.h" />
     <ClInclude Include="..\..\..\include\taskgraph\task_rttr_gen.h" />
@@ -28,8 +32,11 @@
     <ClCompile Include="..\..\..\source\TaskGraph.cpp" />
     <ClCompile Include="..\..\..\source\Task.cpp" />
     <ClCompile Include="..\..\..\source\TaskHelper.cpp" />
+    <ClCompile Include="..\..\..\source\task\ReadImage.cpp" />
     <ClCompile Include="..\..\..\source\task\Mipmap.cpp" />
     <ClCompile Include="..\..\..\source\RegistRTTR.cpp" />
+    <ClCompile Include="..\..\..\source\task\ParamImpl.cpp" />
+    <ClCompile Include="..\..\..\source\task\WriteImage.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>taskgraph</ProjectName>
@@ -74,7 +81,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\cu\src;..\..\..\..\sm\src\sm;..\..\..\..\memmgr\include;..\..\..\..\guard\include;..\..\..\..\dag\include;..\..\..\..\external\boost\include;..\..\..\..\external\rttr\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\cu\src;..\..\..\..\sm\src\sm;..\..\..\..\gimg\src\gimg;..\..\..\..\memmgr\include;..\..\..\..\guard\include;..\..\..\..\dag\include;..\..\..\..\primitive\include;..\..\..\..\gis\include;..\..\..\..\external\boost\include;..\..\..\..\external\rttr\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;NOISE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -89,7 +96,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\cu\src;..\..\..\..\sm\src\sm;..\..\..\..\memmgr\include;..\..\..\..\guard\include;..\..\..\..\dag\include;..\..\..\..\external\boost\include;..\..\..\..\external\rttr\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\cu\src;..\..\..\..\sm\src\sm;..\..\..\..\gimg\src\gimg;..\..\..\..\memmgr\include;..\..\..\..\guard\include;..\..\..\..\dag\include;..\..\..\..\primitive\include;..\..\..\..\gis\include;..\..\..\..\external\boost\include;..\..\..\..\external\rttr\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;NOISE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>

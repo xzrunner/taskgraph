@@ -1,6 +1,7 @@
 #pragma once
 
 #include "taskgraph/Task.h"
+#include "taskgraph/ParamType.h"
 
 #include <SM_Vector.h>
 
@@ -9,16 +10,16 @@ namespace taskgraph
 namespace task
 {
 
-class Mipmap : public Task
+class ReadImage : public Task
 {
 public:
-    Mipmap()
+    ReadImage()
     {
         m_imports = {
-            {{ ParamType::Image, "in" }},
+            {{ ParamType::File, "in" }},
         };
         m_exports = {
-            {{ ParamType::ImageArray, "out" }},
+            {{ ParamType::Image, "out" }},
         };
     }
 
@@ -26,11 +27,11 @@ public:
 
     RTTR_ENABLE(Task)
 
-#define PARM_FILEPATH "taskgraph/task/Mipmap.parm.h"
+#define PARM_FILEPATH "taskgraph/task/ReadImage.parm.h"
 #include <dag/node_parms_gen.h>
 #undef PARM_FILEPATH
 
-}; // Mipmap
+}; // ReadImage
 
 }
 }

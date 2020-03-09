@@ -5,7 +5,11 @@ namespace taskgraph
 
 enum class ParamType
 {
-    Path,
+    Any,
+
+    File,
+    Image,
+    ImageArray,
 };
 
 }

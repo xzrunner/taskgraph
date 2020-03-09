@@ -9,6 +9,7 @@ class TaskHelper
 {
 public:
     static TaskPtr GetInputTask(const Task& task, size_t idx);
+    static ParamPtr GetInputParam(const Task& task, size_t idx);
 
 }; // TaskHelper
 
