@@ -31,8 +31,8 @@ rttr::registration::class_<taskgraph::Task>("taskgraph::Task")
 
 rttr::registration::enumeration<taskgraph::task::WriteImage::Type>("task_write_img_type")
 (
-    REGIST_ENUM_ITEM(taskgraph::task::WriteImage::Type::PNG, "png", "png"),
-    REGIST_ENUM_ITEM(taskgraph::task::WriteImage::Type::HGT, "hgt", "hgt")
+    REGIST_ENUM_ITEM(taskgraph::task::WriteImage::Type::PNG, "png", "PNG"),
+    REGIST_ENUM_ITEM(taskgraph::task::WriteImage::Type::HGT, "hgt", "HGT")
 );
 
 }

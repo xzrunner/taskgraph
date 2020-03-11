@@ -14,10 +14,14 @@
     <ClInclude Include="..\..\..\include\taskgraph\TaskGraph.h" />
     <ClInclude Include="..\..\..\include\taskgraph\Task.h" />
     <ClInclude Include="..\..\..\include\taskgraph\TaskHelper.h" />
+    <ClInclude Include="..\..\..\include\taskgraph\task\CropImage.h" />
+    <ClInclude Include="..\..\..\include\taskgraph\task\CropImage.parm.h" />
     <ClInclude Include="..\..\..\include\taskgraph\task\ReadImage.h" />
     <ClInclude Include="..\..\..\include\taskgraph\task\ReadImage.parm.h" />
     <ClInclude Include="..\..\..\include\taskgraph\task\Mipmap.h" />
     <ClInclude Include="..\..\..\include\taskgraph\task\Mipmap.parm.h" />
+    <ClInclude Include="..\..\..\include\taskgraph\task\SplitImage.h" />
+    <ClInclude Include="..\..\..\include\taskgraph\task\SplitImage.parm.h" />
     <ClInclude Include="..\..\..\include\taskgraph\task\WriteImage.h" />
     <ClInclude Include="..\..\..\include\taskgraph\task\WriteImage.parm.h" />
     <ClInclude Include="..\..\..\include\taskgraph\task_include_gen.h" />
@@ -32,10 +36,12 @@
     <ClCompile Include="..\..\..\source\TaskGraph.cpp" />
     <ClCompile Include="..\..\..\source\Task.cpp" />
     <ClCompile Include="..\..\..\source\TaskHelper.cpp" />
+    <ClCompile Include="..\..\..\source\task\CropImage.cpp" />
     <ClCompile Include="..\..\..\source\task\ReadImage.cpp" />
     <ClCompile Include="..\..\..\source\task\Mipmap.cpp" />
     <ClCompile Include="..\..\..\source\RegistRTTR.cpp" />
     <ClCompile Include="..\..\..\source\task\ParamImpl.cpp" />
+    <ClCompile Include="..\..\..\source\task\SplitImage.cpp" />
     <ClCompile Include="..\..\..\source\task\WriteImage.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

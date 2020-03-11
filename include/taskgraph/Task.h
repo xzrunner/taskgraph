@@ -8,7 +8,7 @@
 namespace taskgraph
 {
 
-class Task : public dag::Node<ParamType>
+class Task : public dag::Node<size_t>
 {
 public:
     Task() {}
@@ -18,7 +18,7 @@ public:
 protected:
     std::vector<ParamPtr> m_vals;
 
-    RTTR_ENABLE(dag::Node<ParamType>)
+    RTTR_ENABLE(dag::Node<size_t>)
 
 }; // Task
 

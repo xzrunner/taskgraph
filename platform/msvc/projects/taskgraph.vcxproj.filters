@@ -71,6 +71,18 @@
     <ClInclude Include="..\..\..\include\taskgraph\task\WriteImage.parm.h">
       <Filter>tasks\io</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\taskgraph\task\SplitImage.h">
+      <Filter>tasks\image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\taskgraph\task\SplitImage.parm.h">
+      <Filter>tasks\image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\taskgraph\task\CropImage.h">
+      <Filter>tasks\image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\taskgraph\task\CropImage.parm.h">
+      <Filter>tasks\image</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\TaskGraph.cpp" />
@@ -94,6 +106,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\task\WriteImage.cpp">
       <Filter>tasks\io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\task\SplitImage.cpp">
+      <Filter>tasks\image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\task\CropImage.cpp">
+      <Filter>tasks\image</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

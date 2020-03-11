@@ -3,13 +3,13 @@
 namespace taskgraph
 {
 
-enum class ParamType
+enum ParamType
 {
-    Any,
+    Any = 0,
 
-    File,
-    Image,
-    ImageArray,
+    File       = 0x0001,
+    Image      = 0x0002,
+    ImageArray = 0x0004,
 };
 
 }
