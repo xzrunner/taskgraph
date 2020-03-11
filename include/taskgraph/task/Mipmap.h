@@ -15,10 +15,10 @@ public:
     Mipmap()
     {
         m_imports = {
-            {{ ParamType::Image, "in" }},
+            {{ PT_IMAGE, "in" }},
         };
         m_exports = {
-            {{ ParamType::ImageArray, "out" }},
+            {{ PT_IMAGE_ARRAY, "out" }},
         };
     }
 

@@ -23,10 +23,10 @@ public:
     WriteImage()
     {
         m_imports = {
-            {{ ParamType::File, "in" }},
+            {{ PT_FILE, "in" }},
         };
         m_exports = {
-            {{ ParamType::Image, "out" }},
+            {{ PT_IMAGE, "out" }},
         };
     }
 

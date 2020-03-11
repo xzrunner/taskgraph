@@ -20,7 +20,7 @@ void ReadImage::Execute(const std::shared_ptr<dag::Context>& ctx)
     auto prev_param = TaskHelper::GetInputParam(*this, 0);
     if (prev_param)
     {
-        assert(prev_param->Type() == ParamType::File);
+        assert(prev_param->Type() == PT_FILE);
         filepath = std::static_pointer_cast<FileParam>(prev_param)->GetFilepath();
     }
     else

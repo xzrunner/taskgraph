@@ -16,7 +16,7 @@ public:
         : m_filepath(filepath) {}
 
     virtual ParamType Type() const override {
-        return ParamType::File;
+        return PT_FILE;
     }
 
     auto& GetFilepath() const { return m_filepath; }
@@ -33,7 +33,7 @@ public:
         : m_img(img) {}
 
     virtual ParamType Type() const override {
-        return ParamType::Image;
+        return PT_IMAGE;
     }
 
     auto& GetImage() const { return m_img; }
@@ -50,7 +50,7 @@ public:
         : m_imgs(imgs) {}
 
     virtual ParamType Type() const override {
-        return ParamType::ImageArray;
+        return PT_IMAGE_ARRAY;
     }
 
     auto& GetAllImages() const { return m_imgs; }

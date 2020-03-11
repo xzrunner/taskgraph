@@ -18,7 +18,7 @@ void Mipmap::Execute(const std::shared_ptr<dag::Context>& ctx)
         return;
     }
 
-    assert(prev_param->Type() == ParamType::Image);
+    assert(prev_param->Type() == PT_IMAGE);
     auto img = std::static_pointer_cast<ImageParam>(prev_param)->GetImage();
     if (!img) {
         return;

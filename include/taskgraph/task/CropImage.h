@@ -16,10 +16,10 @@ public:
     CropImage()
     {
         m_imports = {
-            {{ ParamType::Image | ParamType::ImageArray, "in" }},
+            {{ PT_IMAGE | PT_IMAGE_ARRAY, "in" }},
         };
         m_exports = {
-            {{ ParamType::ImageArray, "out" }},
+            {{ PT_IMAGE_ARRAY, "out" }},
         };
     }
 

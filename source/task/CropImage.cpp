@@ -23,7 +23,7 @@ void CropImage::Execute(const std::shared_ptr<dag::Context>& ctx)
     auto type = prev_param->Type();
     switch (type)
     {
-    case ParamType::Image:
+    case PT_IMAGE:
     {
         auto img = std::static_pointer_cast<ImageParam>(prev_param)->GetImage();
         if (img) {
@@ -34,7 +34,7 @@ void CropImage::Execute(const std::shared_ptr<dag::Context>& ctx)
         }
     }
         break;
-    case ParamType::ImageArray:
+    case PT_IMAGE_ARRAY:
     {
         auto& imgs = std::static_pointer_cast<ImageArrayParam>(prev_param)->GetAllImages();
         for (auto& img : imgs) {

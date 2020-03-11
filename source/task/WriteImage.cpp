@@ -27,7 +27,7 @@ void WriteImage::Execute(const std::shared_ptr<dag::Context>& ctx)
         return;
     }
 
-    assert(prev_param->Type() == ParamType::ImageArray);
+    assert(prev_param->Type() == PT_IMAGE_ARRAY);
     auto imgs = std::static_pointer_cast<ImageArrayParam>(prev_param)->GetAllImages();
     if (imgs.empty()) {
         return;
