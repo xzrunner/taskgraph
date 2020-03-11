@@ -32,7 +32,7 @@ void ReadImage::Execute(const std::shared_ptr<dag::Context>& ctx)
         return;
     }
 
-    std::shared_ptr<prim::Bitmap<short>> img = nullptr;
+    std::shared_ptr<Image> img = nullptr;
 
     auto ext = boost::filesystem::extension(filepath);
     std::transform(ext.begin(), ext.end(), ext.begin(), tolower);
@@ -43,8 +43,8 @@ void ReadImage::Execute(const std::shared_ptr<dag::Context>& ctx)
         std::vector<int16_t> vals;
         if (gis::ElevationLoader::Load(filepath, width, height, vals))
         {
-            img = std::make_shared<prim::Bitmap<short>>(width, height, 1);
-            img->SetValues(vals);
+            img = std::make_shared<Image>(width, height, 1);
+            img->bmp.SetValues(vals);
         }
     }
     else
@@ -71,13 +71,13 @@ void ReadImage::Execute(const std::shared_ptr<dag::Context>& ctx)
                 assert(0);
             }
 
-            img = std::make_shared<prim::Bitmap<short>>(width, height, channels);
+            img = std::make_shared<Image>(width, height, channels);
 
             std::vector<short> vals(width * height * channels);
             for (size_t i = 0, n = vals.size(); i < n; ++i) {
                 vals[i] = pixels[i];
             }
-            img->SetValues(vals);
+            img->bmp.SetValues(vals);
         }
     }
 

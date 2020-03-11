@@ -24,27 +24,27 @@ void Mipmap::Execute(const std::shared_ptr<dag::Context>& ctx)
         return;
     }
 
-    std::vector<std::shared_ptr<prim::Bitmap<short>>> imgs;
+    std::vector<std::shared_ptr<Image>> imgs;
 
-    const int w = img->Width();
-    const int h = img->Height();
+    const int w = img->bmp.Width();
+    const int h = img->bmp.Height();
 
     const int max = static_cast<int>(std::min(std::log2(w), std::log2(h)));
     const int levels = std::min(max, m_levels);
     imgs.resize(levels);
 
-    const int band = img->Channels();
+    const int band = img->bmp.Channels();
 
-    std::shared_ptr<prim::Bitmap<short>> prev = img;
+    std::shared_ptr<Image> prev = img;
     for (int i = 0; i < levels; ++i)
     {
         assert(prev);
-        const int prev_w = prev->Width();
-        const int prev_h = prev->Height();
+        const int prev_w = prev->bmp.Width();
+        const int prev_h = prev->bmp.Height();
         const int curr_w = prev_w % 2 ? (prev_w + 1) / 2 : prev_w / 2;
         const int curr_h = prev_h % 2 ? (prev_h + 1) / 2 : prev_h / 2;
 
-        auto& src = prev->GetValues();
+        auto& src = prev->bmp.GetValues();
         std::vector<short> dst(curr_w * curr_h * band);
         for (int y = 0; y < curr_h; ++y) {
             for (int x = 0; x < curr_w; ++x) {
@@ -54,8 +54,8 @@ void Mipmap::Execute(const std::shared_ptr<dag::Context>& ctx)
             }
         }
 
-        auto curr = std::make_shared<prim::Bitmap<short>>(curr_w, curr_h, band);
-        curr->SetValues(dst);
+        auto curr = std::make_shared<Image>(curr_w, curr_h, band);
+        curr->bmp.SetValues(dst);
         imgs[i] = curr;
         prev = curr;
     }

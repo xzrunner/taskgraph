@@ -41,15 +41,25 @@ void WriteImage::Execute(const std::shared_ptr<dag::Context>& ctx)
         for (size_t i = 0, n = imgs.size(); i < n; ++i)
         {
             auto& img = imgs[i];
-            auto& vals = img->GetValues();
+            auto& vals = img->bmp.GetValues();
             if (vals.empty()) {
                 continue;
             }
 
-            auto filename = name + "_" + std::to_string(i) + ".jpg";
+            std::string filename = name;
+            if (!img->name.empty()) {
+                filename += "_" + img->name;
+            } else {
+                filename += "_" + std::to_string(i);
+            }
+#ifdef FORCE_OUTPUT_JPG
+            filename += ".jpg";
+#else
+            filename += ".png";
+#endif // FORCE_OUTPUT_JPG
             auto filepath = boost::filesystem::absolute(filename, dir).string();
 
-            auto c = img->Channels();
+            auto c = img->bmp.Channels();
             GIMG_PIXEL_FORMAT fmt;
             switch (c)
             {
@@ -70,8 +80,8 @@ void WriteImage::Execute(const std::shared_ptr<dag::Context>& ctx)
                 continue;
             }
 
-            auto w = img->Width();
-            auto h = img->Height();
+            auto w = img->bmp.Width();
+            auto h = img->bmp.Height();
 
             std::vector<uint8_t> pixels;
 #ifdef FORCE_OUTPUT_JPG
@@ -103,7 +113,7 @@ void WriteImage::Execute(const std::shared_ptr<dag::Context>& ctx)
     case Type::HGT:
         for (size_t i = 0, n = imgs.size(); i < n; ++i)
         {
-            auto& vals = imgs[i]->GetValues();
+            auto& vals = imgs[i]->bmp.GetValues();
             if (vals.empty()) {
                 continue;
             }

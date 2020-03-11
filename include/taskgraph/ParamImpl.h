@@ -26,10 +26,19 @@ private:
 
 }; // FileParam
 
+struct Image
+{
+    Image(size_t width, size_t height, size_t channels)
+        : bmp(width, height, channels) {}
+
+    std::string name;
+    prim::Bitmap<short> bmp;
+};
+
 class ImageParam : public Param
 {
 public:
-    explicit ImageParam(const std::shared_ptr<prim::Bitmap<short>>& img)
+    explicit ImageParam(const std::shared_ptr<Image>& img)
         : m_img(img) {}
 
     virtual ParamType Type() const override {
@@ -39,14 +48,14 @@ public:
     auto& GetImage() const { return m_img; }
 
 private:
-    std::shared_ptr<prim::Bitmap<short>> m_img;
+    std::shared_ptr<Image> m_img = nullptr;
 
 }; // ImageParam
 
 class ImageArrayParam : public Param
 {
 public:
-    explicit ImageArrayParam(const std::vector<std::shared_ptr<prim::Bitmap<short>>>& imgs)
+    explicit ImageArrayParam(const std::vector<std::shared_ptr<Image>>& imgs)
         : m_imgs(imgs) {}
 
     virtual ParamType Type() const override {
@@ -56,7 +65,7 @@ public:
     auto& GetAllImages() const { return m_imgs; }
 
 private:
-    std::vector<std::shared_ptr<prim::Bitmap<short>>> m_imgs;
+    std::vector<std::shared_ptr<Image>> m_imgs;
 
 }; // ImageArrayParam
 

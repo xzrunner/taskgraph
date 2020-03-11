@@ -18,7 +18,7 @@ void CropImage::Execute(const std::shared_ptr<dag::Context>& ctx)
         return;
     }
 
-    std::vector<std::shared_ptr<prim::Bitmap<short>>> images;
+    std::vector<std::shared_ptr<Image>> images;
 
     auto type = prev_param->Type();
     switch (type)
@@ -54,18 +54,18 @@ void CropImage::Execute(const std::shared_ptr<dag::Context>& ctx)
     }
 }
 
-std::shared_ptr<prim::Bitmap<short>>
-CropImage::Cropping(const prim::Bitmap<short>& img, size_t sub_x, size_t sub_y, size_t sub_w, size_t sub_h)
+std::shared_ptr<Image>
+CropImage::Cropping(const Image& img, size_t sub_x, size_t sub_y, size_t sub_w, size_t sub_h)
 {
-    auto w = img.Width();
-    auto h = img.Height();
-    auto c = img.Channels();
+    auto w = img.bmp.Width();
+    auto h = img.bmp.Height();
+    auto c = img.bmp.Channels();
     if (sub_x >= static_cast<int>(w) ||
         sub_y >= static_cast<int>(h)) {
         return nullptr;
     }
 
-    auto& src_pixels = img.GetValues();
+    auto& src_pixels = img.bmp.GetValues();
 
     size_t min_x = sub_x;
     size_t min_y = sub_y;
@@ -84,8 +84,8 @@ CropImage::Cropping(const prim::Bitmap<short>& img, size_t sub_x, size_t sub_y, 
         }
     }
 
-    auto ret = std::make_shared<prim::Bitmap<short>>(max_x - min_x, max_y - min_y, c);
-    ret->SetValues(pixels);
+    auto ret = std::make_shared<Image>(max_x - min_x, max_y - min_y, c);
+    ret->bmp.SetValues(pixels);
     return ret;
 }
 

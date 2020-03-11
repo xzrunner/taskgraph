@@ -3,10 +3,12 @@
 #include "taskgraph/Task.h"
 
 #include <SM_Vector.h>
-#include <primitive/Bitmap.h>
 
 namespace taskgraph
 {
+
+struct Image;
+
 namespace task
 {
 
@@ -26,8 +28,8 @@ public:
     virtual void Execute(const std::shared_ptr<dag::Context>& ctx = nullptr) override;
 
 private:
-    void Split(std::vector<std::shared_ptr<prim::Bitmap<short>>>& dst,
-        const prim::Bitmap<short>& src) const;
+    void Split(std::vector<std::shared_ptr<Image>>& dst,
+        const Image& src) const;
 
     RTTR_ENABLE(Task)
 

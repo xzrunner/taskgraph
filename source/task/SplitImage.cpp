@@ -15,7 +15,7 @@ void SplitImage::Execute(const std::shared_ptr<dag::Context>& ctx)
         return;
     }
 
-    std::vector<std::shared_ptr<prim::Bitmap<short>>> dst;
+    std::vector<std::shared_ptr<Image>> dst;
 
     auto type = prev_param->Type();
     switch (type)
@@ -45,11 +45,11 @@ void SplitImage::Execute(const std::shared_ptr<dag::Context>& ctx)
     }
 }
 
-void SplitImage::Split(std::vector<std::shared_ptr<prim::Bitmap<short>>>& dst,
-                       const prim::Bitmap<short>& src) const
+void SplitImage::Split(std::vector<std::shared_ptr<Image>>& dst,
+                       const Image& src) const
 {
-    size_t w = src.Width();
-    size_t h = src.Height();
+    size_t w = src.bmp.Width();
+    size_t h = src.bmp.Height();
     if (w == 0 || h == 0) {
         return;
     }
@@ -73,9 +73,12 @@ void SplitImage::Split(std::vector<std::shared_ptr<prim::Bitmap<short>>>& dst,
     for (size_t x = 0; x < w; x += sw) {
         for (size_t y = 0; y < h; y += sh) {
             auto img = CropImage::Cropping(src, x, y, sw, sh);
-            if (img) {
-                dst.push_back(img);
+            if (!img) {
+                continue;
             }
+            img->name = std::to_string(x) + "_" + std::to_string(y)
+                + "_" + std::to_string(sw) + "_" + std::to_string(sh);
+            dst.push_back(img);
         }
     }
 }
