@@ -3,7 +3,7 @@
 #undef EXE_FILEPATH
 
 #include "taskgraph/Task.h"
-//#include "taskgraph/task/WriteImage.h"
+#include "taskgraph/task/Group.h"
 
 #include <rttr/registration>
 
@@ -33,6 +33,12 @@ rttr::registration::enumeration<taskgraph::task::WriteImage::Type>("task_write_i
 (
     REGIST_ENUM_ITEM(taskgraph::task::WriteImage::Type::PNG, "png", "PNG"),
     REGIST_ENUM_ITEM(taskgraph::task::WriteImage::Type::HGT, "hgt", "HGT")
+);
+
+rttr::registration::enumeration<taskgraph::task::Group::Type>("task_group_type")
+(
+    REGIST_ENUM_ITEM(taskgraph::task::Group::Type::Parallel, "parallel", "Parallel"),
+    REGIST_ENUM_ITEM(taskgraph::task::Group::Type::Sequence, "sequence", "Sequence")
 );
 
 }

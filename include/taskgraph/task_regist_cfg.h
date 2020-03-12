@@ -2,6 +2,16 @@
 #error "You must define EXE_FILEPATH macro before include this file"
 #endif
 
+// file
+
+#define PARM_TASK_TYPE FileRemove
+#define PARM_TASK_NAME file_remove
+#include EXE_FILEPATH
+
+#define PARM_TASK_TYPE MakeDirectory
+#define PARM_TASK_NAME make_dir
+#include EXE_FILEPATH
+
 // io
 
 #define PARM_TASK_TYPE BuildVTex
@@ -28,4 +38,10 @@
 
 #define PARM_TASK_TYPE SplitImage
 #define PARM_TASK_NAME split_img
+#include EXE_FILEPATH
+
+// tools
+
+#define PARM_TASK_TYPE Group
+#define PARM_TASK_NAME group
 #include EXE_FILEPATH
