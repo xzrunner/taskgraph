@@ -44,7 +44,10 @@ void ReadImage::Execute(const std::shared_ptr<dag::Context>& ctx)
         if (gis::ElevationLoader::Load(filepath, width, height, vals))
         {
             img = std::make_shared<Image>(width, height, 1);
-            img->bmp.SetValues(vals);
+            auto pixels = img->bmp.GetPixels();
+            for (size_t i = 0, n = vals.size(); i < n; ++i) {
+                pixels[i] = vals[i];
+            }
         }
     }
     else
@@ -72,12 +75,10 @@ void ReadImage::Execute(const std::shared_ptr<dag::Context>& ctx)
             }
 
             img = std::make_shared<Image>(width, height, channels);
-
-            std::vector<short> vals(width * height * channels);
-            for (size_t i = 0, n = vals.size(); i < n; ++i) {
+            auto vals = img->bmp.GetPixels();
+            for (size_t i = 0, n = width * height * channels; i < n; ++i) {
                 vals[i] = pixels[i];
             }
-            img->bmp.SetValues(vals);
         }
     }
 

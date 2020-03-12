@@ -65,27 +65,28 @@ CropImage::Cropping(const Image& img, size_t sub_x, size_t sub_y, size_t sub_w, 
         return nullptr;
     }
 
-    auto& src_pixels = img.bmp.GetValues();
+    auto src_pixels = img.bmp.GetPixels();
 
     size_t min_x = sub_x;
     size_t min_y = sub_y;
     size_t max_x = std::min(min_x + sub_w, w);
     size_t max_y = std::min(min_y + sub_h, h);
+
+    auto ret = std::make_shared<Image>(max_x - min_x, max_y - min_y, c);
+    auto dst_pixels = ret->bmp.GetPixels();
+
     auto sw = max_x - min_x;
     auto sh = max_y - min_y;
-    std::vector<short> pixels(sw * sh * c);
     for (size_t y = min_y; y < max_y; ++y) {
         for (size_t x = min_x; x < max_x; ++x) {
             for (size_t i = 0; i < c; ++i) {
                 auto s_idx = (y * w + x) * c + i;
                 auto d_idx = ((y - min_y) * sw + x - min_x) * c + i;
-                pixels[d_idx] = src_pixels[s_idx];
+                dst_pixels[d_idx] = src_pixels[s_idx];
             }
         }
     }
 
-    auto ret = std::make_shared<Image>(max_x - min_x, max_y - min_y, c);
-    ret->bmp.SetValues(pixels);
     return ret;
 }
 

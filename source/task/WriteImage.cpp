@@ -41,8 +41,11 @@ void WriteImage::Execute(const std::shared_ptr<dag::Context>& ctx)
         for (size_t i = 0, n = imgs.size(); i < n; ++i)
         {
             auto& img = imgs[i];
-            auto& vals = img->bmp.GetValues();
-            if (vals.empty()) {
+            auto& bmp = img->bmp;
+            auto w = bmp.Width();
+            auto h = bmp.Height();
+            auto c = bmp.Channels();
+            if (w == 0 || h == 0 || c == 0) {
                 continue;
             }
 
@@ -59,7 +62,7 @@ void WriteImage::Execute(const std::shared_ptr<dag::Context>& ctx)
 #endif // FORCE_OUTPUT_JPG
             auto filepath = boost::filesystem::absolute(filename, dir).string();
 
-            auto c = img->bmp.Channels();
+            auto vals = bmp.GetPixels();
             GIMG_PIXEL_FORMAT fmt;
             switch (c)
             {
@@ -80,15 +83,11 @@ void WriteImage::Execute(const std::shared_ptr<dag::Context>& ctx)
                 continue;
             }
 
-            auto w = img->bmp.Width();
-            auto h = img->bmp.Height();
-
             std::vector<uint8_t> pixels;
 #ifdef FORCE_OUTPUT_JPG
             if (c == 4)
             {
                 pixels.resize(w * h * c);
-                assert(pixels.size() == vals.size());
                 for (size_t i = 0, n = w * h; i < n; ++i) {
                     for (size_t j = 0; j < 3; ++j) {
                         pixels[i * 3 + j] = static_cast<uint8_t>(vals[i * 4 + j]);
@@ -99,7 +98,6 @@ void WriteImage::Execute(const std::shared_ptr<dag::Context>& ctx)
             {
 #endif // FORCE_OUTPUT_JPG
                 pixels.resize(w * h * c);
-                assert(pixels.size() == vals.size());
                 for (size_t i = 0, n = pixels.size(); i < n; ++i) {
                     pixels[i] = static_cast<uint8_t>(vals[i]);
                 }
@@ -113,16 +111,20 @@ void WriteImage::Execute(const std::shared_ptr<dag::Context>& ctx)
     case Type::HGT:
         for (size_t i = 0, n = imgs.size(); i < n; ++i)
         {
-            auto& vals = imgs[i]->bmp.GetValues();
-            if (vals.empty()) {
+            auto& bmp = imgs[i]->bmp;
+            auto w = bmp.Width();
+            auto h = bmp.Height();
+            auto c = bmp.Channels();
+            if (w == 0 || h == 0 || c == 0) {
                 continue;
             }
+            auto vals = bmp.GetPixels();
 
             auto filename = name + ".hgt" + std::to_string(i);
             auto filepath = boost::filesystem::absolute(filename, dir).string();
 
             std::ofstream fout(filepath.c_str(), std::ios::binary);
-            fout.write(reinterpret_cast<const char*>(vals.data()), vals.size() * sizeof(vals[0]));
+            fout.write(reinterpret_cast<const char*>(vals), w * h * c * sizeof(vals[0]));
             fout.close();
         }
         break;
