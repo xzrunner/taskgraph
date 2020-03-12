@@ -27,6 +27,9 @@ public:
 
     virtual void Execute(const std::shared_ptr<dag::Context>& ctx = nullptr) override;
 
+    static void Split(std::vector<std::shared_ptr<Image>>& dst,
+        const Image& src, size_t tile_w, size_t tile_h);
+
 private:
     void Split(std::vector<std::shared_ptr<Image>>& dst,
         const Image& src) const;

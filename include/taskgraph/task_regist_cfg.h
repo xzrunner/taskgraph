@@ -4,6 +4,10 @@
 
 // io
 
+#define PARM_TASK_TYPE BuildVTex
+#define PARM_TASK_NAME build_vtex
+#include EXE_FILEPATH
+
 #define PARM_TASK_TYPE ReadImage
 #define PARM_TASK_NAME read_img
 #include EXE_FILEPATH

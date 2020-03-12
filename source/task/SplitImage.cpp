@@ -46,6 +46,36 @@ void SplitImage::Execute(const std::shared_ptr<dag::Context>& ctx)
 }
 
 void SplitImage::Split(std::vector<std::shared_ptr<Image>>& dst,
+                       const Image& src, size_t tile_w, size_t tile_h)
+{
+    size_t w = src.bmp.Width();
+    size_t h = src.bmp.Height();
+    if (w == 0 || h == 0) {
+        return;
+    }
+
+    size_t sw = tile_w;
+    size_t sh = tile_h;
+    if (sw == 0 || sh == 0) {
+        return;
+    }
+
+    for (size_t x = 0; x < w; x += sw) {
+        for (size_t y = 0; y < h; y += sh) {
+            auto img = CropImage::Cropping(src, x, y, sw, sh);
+            if (!img) {
+                continue;
+            }
+            auto tw = std::min(sw, w - x);
+            auto th = std::min(sh, h - y);
+            img->name = std::to_string(x) + "_" + std::to_string(y)
+                + "_" + std::to_string(tw) + "_" + std::to_string(th);
+            dst.push_back(img);
+        }
+    }
+}
+
+void SplitImage::Split(std::vector<std::shared_ptr<Image>>& dst,
                        const Image& src) const
 {
     size_t w = src.bmp.Width();
@@ -66,21 +96,7 @@ void SplitImage::Split(std::vector<std::shared_ptr<Image>>& dst,
         sh = m_tile_h;
     }
 
-    if (sw == 0 || sh == 0) {
-        return;
-    }
-
-    for (size_t x = 0; x < w; x += sw) {
-        for (size_t y = 0; y < h; y += sh) {
-            auto img = CropImage::Cropping(src, x, y, sw, sh);
-            if (!img) {
-                continue;
-            }
-            img->name = std::to_string(x) + "_" + std::to_string(y)
-                + "_" + std::to_string(sw) + "_" + std::to_string(sh);
-            dst.push_back(img);
-        }
-    }
+    Split(dst, src, sw, sh);
 }
 
 }
