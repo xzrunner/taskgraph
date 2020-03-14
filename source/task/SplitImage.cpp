@@ -46,7 +46,7 @@ void SplitImage::Execute(const std::shared_ptr<dag::Context>& ctx)
 }
 
 void SplitImage::Split(std::vector<std::shared_ptr<Image>>& dst,
-                       const Image& src, size_t tile_w, size_t tile_h)
+                       const Image& src, size_t tile_w, size_t tile_h, bool trim)
 {
     size_t w = src.bmp.Width();
     size_t h = src.bmp.Height();
@@ -62,7 +62,7 @@ void SplitImage::Split(std::vector<std::shared_ptr<Image>>& dst,
 
     for (size_t x = 0; x < w; x += sw) {
         for (size_t y = 0; y < h; y += sh) {
-            auto img = CropImage::Cropping(src, x, y, sw, sh);
+            auto img = CropImage::Cropping(src, x, y, sw, sh, trim);
             if (!img) {
                 continue;
             }
@@ -96,7 +96,7 @@ void SplitImage::Split(std::vector<std::shared_ptr<Image>>& dst,
         sh = m_tile_h;
     }
 
-    Split(dst, src, sw, sh);
+    Split(dst, src, sw, sh, true);
 }
 
 }

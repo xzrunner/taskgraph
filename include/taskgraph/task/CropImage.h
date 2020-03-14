@@ -28,7 +28,7 @@ public:
     virtual void Execute(const std::shared_ptr<dag::Context>& ctx = nullptr) override;
 
     static std::shared_ptr<Image>
-        Cropping(const Image& img, size_t x, size_t y , size_t w, size_t h);
+        Cropping(const Image& img, size_t x, size_t y , size_t w, size_t h, bool trim);
 
     RTTR_ENABLE(Task)
 

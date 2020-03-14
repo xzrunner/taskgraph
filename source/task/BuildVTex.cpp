@@ -61,7 +61,7 @@ void BuildVTex::Execute(const std::shared_ptr<dag::Context>& ctx)
     for (auto map : mipmaps)
     {
         std::vector<std::shared_ptr<Image>> imgs;
-        SplitImage::Split(imgs, *map, m_tile_size, m_tile_size);
+        SplitImage::Split(imgs, *map, m_tile_size, m_tile_size, false);
         for (auto sub_img : imgs)
         {
             auto& bmp = sub_img->bmp;

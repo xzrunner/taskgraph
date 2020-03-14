@@ -27,7 +27,7 @@ void CropImage::Execute(const std::shared_ptr<dag::Context>& ctx)
     {
         auto img = std::static_pointer_cast<ImageParam>(prev_param)->GetImage();
         if (img) {
-            auto sub = Cropping(*img, m_x, m_y, m_w, m_h);
+            auto sub = Cropping(*img, m_x, m_y, m_w, m_h, true);
             if (sub) {
                 images.push_back(sub);
             }
@@ -38,7 +38,7 @@ void CropImage::Execute(const std::shared_ptr<dag::Context>& ctx)
     {
         auto& imgs = std::static_pointer_cast<ImageArrayParam>(prev_param)->GetAllImages();
         for (auto& img : imgs) {
-            auto sub = Cropping(*img, m_x, m_y, m_w, m_h);
+            auto sub = Cropping(*img, m_x, m_y, m_w, m_h, true);
             if (sub) {
                 images.push_back(sub);
             }
@@ -55,7 +55,7 @@ void CropImage::Execute(const std::shared_ptr<dag::Context>& ctx)
 }
 
 std::shared_ptr<Image>
-CropImage::Cropping(const Image& img, size_t sub_x, size_t sub_y, size_t sub_w, size_t sub_h)
+CropImage::Cropping(const Image& img, size_t sub_x, size_t sub_y, size_t sub_w, size_t sub_h, bool trim)
 {
     auto w = img.bmp.Width();
     auto h = img.bmp.Height();
@@ -72,16 +72,22 @@ CropImage::Cropping(const Image& img, size_t sub_x, size_t sub_y, size_t sub_w, 
     size_t max_x = std::min(min_x + sub_w, w);
     size_t max_y = std::min(min_y + sub_h, h);
 
-    auto ret = std::make_shared<Image>(max_x - min_x, max_y - min_y, c);
+    size_t dw = 0, dh = 0;
+    if (trim) {
+        dw = max_x - min_x;
+        dh = max_y - min_y;
+    } else {
+        dw = sub_w;
+        dh = sub_h;
+    }
+    auto ret = std::make_shared<Image>(dw, dh, c);
     auto dst_pixels = ret->bmp.GetPixels();
 
-    auto sw = max_x - min_x;
-    auto sh = max_y - min_y;
     for (size_t y = min_y; y < max_y; ++y) {
         for (size_t x = min_x; x < max_x; ++x) {
             for (size_t i = 0; i < c; ++i) {
                 auto s_idx = (y * w + x) * c + i;
-                auto d_idx = ((y - min_y) * sw + x - min_x) * c + i;
+                auto d_idx = ((y - min_y) * dw + x - min_x) * c + i;
                 dst_pixels[d_idx] = src_pixels[s_idx];
             }
         }
