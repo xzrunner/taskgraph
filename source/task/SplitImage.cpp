@@ -60,8 +60,8 @@ void SplitImage::Split(std::vector<std::shared_ptr<Image>>& dst,
         return;
     }
 
-    for (size_t x = 0; x < w; x += sw) {
-        for (size_t y = 0; y < h; y += sh) {
+    for (size_t y = 0; y < h; y += sh) {
+        for (size_t x = 0; x < w; x += sw) {
             auto img = CropImage::Cropping(src, x, y, sw, sh, trim);
             if (!img) {
                 continue;
