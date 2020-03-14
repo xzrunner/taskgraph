@@ -4,6 +4,8 @@
 #include "taskgraph/ParamImpl.h"
 #include "taskgraph/TaskHelper.h"
 
+#include <textile/TileDataFile.h>
+
 #include <fstream>
 #include <algorithm>
 
@@ -29,34 +31,30 @@ void BuildVTex::Execute(const std::shared_ptr<dag::Context>& ctx)
         return;
     }
 
-    std::ofstream fout(m_filepath.c_str(), std::ios::binary);
+    std::fstream fout(m_filepath.c_str(), std::ios::out | std::ios::binary);
     if (fout.fail()) {
         return;
     }
 
-    // header 16 byte
-    const uint32_t w = img->bmp.Width(); 
-    fout.write(reinterpret_cast<const char*>(&w), sizeof(w));
-    const uint32_t h = img->bmp.Height();
-    fout.write(reinterpret_cast<const char*>(&h), sizeof(h));
-    const uint16_t tile_sz = m_tile_size;
-    fout.write(reinterpret_cast<const char*>(&tile_sz), sizeof(tile_sz));
-    const uint16_t border_sz = m_border_size;
-    fout.write(reinterpret_cast<const char*>(&border_sz), sizeof(border_sz));
-    const uint16_t channels = static_cast<uint16_t>(img->bmp.Channels());
-    fout.write(reinterpret_cast<const char*>(&channels), sizeof(channels));
-    const uint16_t bytes = 2;
-    fout.write(reinterpret_cast<const char*>(&bytes), sizeof(bytes));
+    // header
+    textile::VTexInfo header;
+    header.vtex_width  = img->bmp.Width();
+    header.vtex_height = img->bmp.Height();
+    header.tile_size   = m_tile_size;
+    header.border_size = m_border_size;
+    header.channels    = img->bmp.Channels();
+    header.bytes       = 1;
+    textile::TileDataFile::WriteHeader(fout, header);
 
     // mipmap
     std::vector<std::shared_ptr<Image>> mipmaps;
-    const size_t max = static_cast<size_t>(std::min(std::log2(w), std::log2(h)));
-    size_t levels = std::min(levels, static_cast<size_t>(std::log2(std::min(w, h) / m_tile_size)));
+    const size_t max = static_cast<size_t>(std::min(std::log2(header.vtex_width), std::log2(header.vtex_height)));
+    size_t levels = std::min(levels, static_cast<size_t>(std::log2(std::min(header.vtex_width, header.vtex_height) / m_tile_size)));
     Mipmap::Build(mipmaps, img, levels);
 
     // split and output
     auto page_size = m_tile_size + 2 * m_border_size;
-    auto tile_size = page_size * page_size * channels * bytes;
+    auto tile_size = page_size * page_size * header.channels * header.bytes;
     uint8_t* tile_buf = new uint8_t[tile_size];
     for (auto map : mipmaps)
     {
