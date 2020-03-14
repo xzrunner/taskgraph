@@ -66,6 +66,7 @@ void BuildVTex::Execute(const std::shared_ptr<dag::Context>& ctx)
         {
             auto& bmp = sub_img->bmp;
             auto src = bmp.GetPixels();
+            memset(tile_buf, 0, tile_size);
             for (size_t i = 0, n = bmp.Width() * bmp.Height() * bmp.Channels(); i < n; ++i) {
                 assert(src[i] <= 0xff && src[i] >= 0);
                 tile_buf[i] = static_cast<uint8_t>(src[i]);
