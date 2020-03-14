@@ -66,10 +66,8 @@ void SplitImage::Split(std::vector<std::shared_ptr<Image>>& dst,
             if (!img) {
                 continue;
             }
-            auto tw = std::min(sw, w - x);
-            auto th = std::min(sh, h - y);
             img->name = std::to_string(x) + "_" + std::to_string(y)
-                + "_" + std::to_string(tw) + "_" + std::to_string(th);
+                + "_" + std::to_string(img->bmp.Width()) + "_" + std::to_string(img->bmp.Height());
             dst.push_back(img);
         }
     }
