@@ -14,8 +14,12 @@
     <ClInclude Include="..\..\..\include\taskgraph\TaskGraph.h" />
     <ClInclude Include="..\..\..\include\taskgraph\Task.h" />
     <ClInclude Include="..\..\..\include\taskgraph\TaskHelper.h" />
+    <ClInclude Include="..\..\..\include\taskgraph\task\FileCompress.h" />
+    <ClInclude Include="..\..\..\include\taskgraph\task\FileCompress.parm.h" />
     <ClInclude Include="..\..\..\include\taskgraph\task\CropImage.h" />
     <ClInclude Include="..\..\..\include\taskgraph\task\CropImage.parm.h" />
+    <ClInclude Include="..\..\..\include\taskgraph\task\FilePattern.h" />
+    <ClInclude Include="..\..\..\include\taskgraph\task\FilePattern.parm.h" />
     <ClInclude Include="..\..\..\include\taskgraph\task\FileRemove.h" />
     <ClInclude Include="..\..\..\include\taskgraph\task\FileRemove.parm.h" />
     <ClInclude Include="..\..\..\include\taskgraph\task\MakeDirectory.h" />
@@ -28,6 +32,8 @@
     <ClInclude Include="..\..\..\include\taskgraph\task\Group.parm.h" />
     <ClInclude Include="..\..\..\include\taskgraph\task\SplitImage.h" />
     <ClInclude Include="..\..\..\include\taskgraph\task\SplitImage.parm.h" />
+    <ClInclude Include="..\..\..\include\taskgraph\task\FileUncompress.h" />
+    <ClInclude Include="..\..\..\include\taskgraph\task\FileUncompress.parm.h" />
     <ClInclude Include="..\..\..\include\taskgraph\task\WriteImage.h" />
     <ClInclude Include="..\..\..\include\taskgraph\task\WriteImage.parm.h" />
     <ClInclude Include="..\..\..\include\taskgraph\task\BuildVTex.h" />
@@ -44,7 +50,9 @@
     <ClCompile Include="..\..\..\source\TaskGraph.cpp" />
     <ClCompile Include="..\..\..\source\Task.cpp" />
     <ClCompile Include="..\..\..\source\TaskHelper.cpp" />
+    <ClCompile Include="..\..\..\source\task\FileCompress.cpp" />
     <ClCompile Include="..\..\..\source\task\CropImage.cpp" />
+    <ClCompile Include="..\..\..\source\task\FilePattern.cpp" />
     <ClCompile Include="..\..\..\source\task\FileRemove.cpp" />
     <ClCompile Include="..\..\..\source\task\MakeDirectory.cpp" />
     <ClCompile Include="..\..\..\source\task\ReadImage.cpp" />
@@ -53,6 +61,7 @@
     <ClCompile Include="..\..\..\source\task\ParamImpl.cpp" />
     <ClCompile Include="..\..\..\source\task\Group.cpp" />
     <ClCompile Include="..\..\..\source\task\SplitImage.cpp" />
+    <ClCompile Include="..\..\..\source\task\FileUncompress.cpp" />
     <ClCompile Include="..\..\..\source\task\WriteImage.cpp" />
     <ClCompile Include="..\..\..\source\task\BuildVTex.cpp" />
   </ItemGroup>
@@ -99,7 +108,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\cu\src;..\..\..\..\sm\src\sm;..\..\..\..\gimg\src\gimg;..\..\..\..\memmgr\include;..\..\..\..\guard\include;..\..\..\..\dag\include;..\..\..\..\primitive\include;..\..\..\..\gis\include;..\..\..\..\external\boost\include;..\..\..\..\external\rttr\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\cu\src;..\..\..\..\sm\src\sm;..\..\..\..\gimg\src\gimg;..\..\..\..\memmgr\include;..\..\..\..\guard\include;..\..\..\..\dag\include;..\..\..\..\primitive\include;..\..\..\..\gis\include;..\..\..\..\textile\include;..\..\..\..\external\boost\include;..\..\..\..\external\rttr\include;..\..\..\..\external\lzma\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;NOISE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -114,7 +123,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\cu\src;..\..\..\..\sm\src\sm;..\..\..\..\gimg\src\gimg;..\..\..\..\memmgr\include;..\..\..\..\guard\include;..\..\..\..\dag\include;..\..\..\..\primitive\include;..\..\..\..\gis\include;..\..\..\..\external\boost\include;..\..\..\..\external\rttr\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\cu\src;..\..\..\..\sm\src\sm;..\..\..\..\gimg\src\gimg;..\..\..\..\memmgr\include;..\..\..\..\guard\include;..\..\..\..\dag\include;..\..\..\..\primitive\include;..\..\..\..\gis\include;..\..\..\..\textile\include;..\..\..\..\external\boost\include;..\..\..\..\external\rttr\include;..\..\..\..\external\lzma\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;NOISE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>

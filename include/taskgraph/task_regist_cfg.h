@@ -4,8 +4,20 @@
 
 // file
 
+#define PARM_TASK_TYPE FileCompress
+#define PARM_TASK_NAME file_compress
+#include EXE_FILEPATH
+
+#define PARM_TASK_TYPE FilePattern
+#define PARM_TASK_NAME file_pattern
+#include EXE_FILEPATH
+
 #define PARM_TASK_TYPE FileRemove
 #define PARM_TASK_NAME file_remove
+#include EXE_FILEPATH
+
+#define PARM_TASK_TYPE FileUncompress
+#define PARM_TASK_NAME file_uncompress
 #include EXE_FILEPATH
 
 #define PARM_TASK_TYPE MakeDirectory

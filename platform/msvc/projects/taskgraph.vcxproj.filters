@@ -113,6 +113,24 @@
     <ClInclude Include="..\..\..\include\taskgraph\task\BuildVTex.parm.h">
       <Filter>tasks\io</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\taskgraph\task\FilePattern.h">
+      <Filter>tasks\file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\taskgraph\task\FilePattern.parm.h">
+      <Filter>tasks\file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\taskgraph\task\FileCompress.h">
+      <Filter>tasks\file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\taskgraph\task\FileCompress.parm.h">
+      <Filter>tasks\file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\taskgraph\task\FileUncompress.h">
+      <Filter>tasks\file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\taskgraph\task\FileUncompress.parm.h">
+      <Filter>tasks\file</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\TaskGraph.cpp" />
@@ -154,6 +172,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\task\BuildVTex.cpp">
       <Filter>tasks\io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\task\FilePattern.cpp">
+      <Filter>tasks\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\task\FileCompress.cpp">
+      <Filter>tasks\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\task\FileUncompress.cpp">
+      <Filter>tasks\file</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

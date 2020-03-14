@@ -7,28 +7,31 @@ namespace taskgraph
 namespace task
 {
 
-class FileRemove : public Task
+class FileUncompress : public Task
 {
 public:
-    FileRemove()
+    FileUncompress()
     {
         m_imports = {
             {{ PT_FILE, "in" }},
         };
         m_exports = {
-            {{ PT_ANY, "out" }},
+            {{ PT_BUFFER, "out" }},
         };
     }
 
     virtual void Execute(const std::shared_ptr<dag::Context>& ctx = nullptr) override;
 
+    static int Uncompress(unsigned char* dst, size_t* dst_len, const unsigned char* src, 
+        size_t* src_len, const unsigned char* props, size_t props_sz);
+
     RTTR_ENABLE(Task)
 
-#define PARM_FILEPATH "taskgraph/task/FileRemove.parm.h"
+#define PARM_FILEPATH "taskgraph/task/FileUncompress.parm.h"
 #include <dag/node_parms_gen.h>
 #undef PARM_FILEPATH
 
-}; // FileRemove
+}; // FileUncompress
 
 }
 }

@@ -7,16 +7,13 @@ namespace taskgraph
 namespace task
 {
 
-class FileRemove : public Task
+class FilePattern : public Task
 {
 public:
-    FileRemove()
+    FilePattern()
     {
-        m_imports = {
-            {{ PT_FILE, "in" }},
-        };
         m_exports = {
-            {{ PT_ANY, "out" }},
+            {{ PT_FILE, "out" }},
         };
     }
 
@@ -24,11 +21,11 @@ public:
 
     RTTR_ENABLE(Task)
 
-#define PARM_FILEPATH "taskgraph/task/FileRemove.parm.h"
+#define PARM_FILEPATH "taskgraph/task/FilePattern.parm.h"
 #include <dag/node_parms_gen.h>
 #undef PARM_FILEPATH
 
-}; // FileRemove
+}; // FilePattern
 
 }
 }

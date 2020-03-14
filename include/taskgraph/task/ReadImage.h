@@ -16,7 +16,7 @@ public:
     ReadImage()
     {
         m_imports = {
-            {{ PT_FILE, "in" }},
+            {{ PT_FILE | PT_BUFFER, "in" }},
         };
         m_exports = {
             {{ PT_IMAGE, "out" }},

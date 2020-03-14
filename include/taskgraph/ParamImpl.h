@@ -26,6 +26,24 @@ private:
 
 }; // FileParam
 
+class BufferParam : public Param
+{
+public:
+    explicit BufferParam(const uint8_t* buf)
+        : m_buf(buf) {}
+    ~BufferParam() { delete[] m_buf; }
+
+    virtual ParamType Type() const override {
+        return PT_BUFFER;
+    }
+
+    auto& GetBuffer() const { return m_buf; }
+
+private:
+    const uint8_t* m_buf;
+
+}; // BufferParam
+
 struct Image
 {
     Image(size_t width, size_t height, size_t channels)
