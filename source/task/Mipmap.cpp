@@ -41,7 +41,7 @@ void Mipmap::Execute(const std::shared_ptr<dag::Context>& ctx)
     m_vals[0] = std::make_shared<ImageArrayParam>(imgs);
 }
 
-void Mipmap::Build(std::vector<std::shared_ptr<Image>>& dst, 
+void Mipmap::Build(std::vector<std::shared_ptr<Image>>& dst,
                    const std::shared_ptr<Image>& src, size_t levels)
 {
     const int w = src->bmp.Width();
@@ -49,8 +49,11 @@ void Mipmap::Build(std::vector<std::shared_ptr<Image>>& dst,
     const int channels = src->bmp.Channels();
 
     dst.resize(levels + 1);
-    dst[0] = std::make_shared<Image>(w, h, channels);;
-    memcpy(dst[0]->bmp.GetPixels(), src->bmp.GetPixels(), w * h * channels * sizeof(src->bmp.GetPixels()[0]));
+    //dst[0] = std::make_shared<Image>(w, h, channels);;
+    //if (dst[0]->bmp.GetPixels()) {
+    //    memcpy(dst[0]->bmp.GetPixels(), src->bmp.GetPixels(), w * h * channels * sizeof(src->bmp.GetPixels()[0]));
+    //}
+    dst[0] = src;   // fixme
 
     std::shared_ptr<Image> prev = src;
     for (size_t i = 0; i < levels; ++i)
@@ -68,7 +71,7 @@ void Mipmap::Build(std::vector<std::shared_ptr<Image>>& dst,
         for (int y = 0; y < curr_h; ++y) {
             for (int x = 0; x < curr_w; ++x) {
                 for (int c = 0; c < channels; ++c) {
-                    dst_p[(y * curr_w + x) * channels + c] = 
+                    dst_p[(y * curr_w + x) * channels + c] =
                         src_p[(y * 2 * prev_w + x * 2) * channels + c];
                 }
             }
